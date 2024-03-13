@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% set action = app.current_route == 'app_admin_editor_new' ? 'Ajout' : 'Édition' %}
+
+{% block title %}{{ action }} d'éditeur{% endblock %}
+
+{% block body %}
+<section class="container px-4">
+    <div class="w-50 m-auto">
+        <h1>{{ action }} d'éditeur</h1>
+
+        {{ form_start(form) }}
+        {{ form_row(form.name, {label: 'Nom'}) }}
+        <button type="submit" class="btn btn-primary">Envoyer</button>
+        {{ form_end(form) }}
+    </div>
+</section>
+{% endblock %}
