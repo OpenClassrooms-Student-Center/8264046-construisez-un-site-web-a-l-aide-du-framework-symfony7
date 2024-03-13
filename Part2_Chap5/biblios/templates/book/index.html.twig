@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catalogue des livres{% endblock %}
+
+{% block body %}
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            {% for book in books %}
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Couverture du livre-->
+                    <img class="card-img-top" src="{{ book.cover }}" alt="Couverture de {{ book.title }}" />
+                    <!-- Détails du livre-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Titre du livre-->
+                            <h5 class="fw-bolder">{{ book.title }}</h5>
+                            <!-- Auteurs du livre-->
+                            {{ book.authors|map(a => a.name)|join(', ') }}
+                        </div>
+                    </div>
+                    <!-- Action-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center">
+                            <a class="btn btn-outline-dark mt-auto" href="{{ path('app_book_show', {id: book.id}) }}">Voir</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+                <p>Aucun livre actuellement</p>
+            {% endfor %}
+        </div>
+        {{ pagerfanta(books) }}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste d'éditeurs{% endblock %}
+
+{% block body %}
+    <section class="container px-4">
+        <h1>Liste d'éditeurs</h1>
+
+        <ul class="list-group list-group-flush">
+            {% for editor in editors %}
+                <div class="card mb-1">
+                    <div class="card-body">
+                        <div class="card-title d-flex justify-content-between">
+                            <a href="{{ path('app_admin_editor_show', {id: editor.id}) }}" class="stretched-link link-dark">
+                                <h4 class="mb-1">{{ editor.name }}</h4>
+                            </a>
+                            <small class="text-muted">Identifiant : {{ editor.id }}</small>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <li>Aucun enregistrement en base de données.</li>
+            {% endfor %}
+        </ul>
+        {{ pagerfanta(editors) }}
+    </section>
+{% endblock %}

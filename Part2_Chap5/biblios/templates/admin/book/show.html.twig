@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Livre{% endblock %}
+
+{% block body %}
+<section class="container px-4">
+    <h1>Livre : </h1>
+
+    {% if book is not null %}
+        <div class="card mb-1 m-auto">
+            <div class="card-body">
+                <div class="card-title d-flex justify-content-between">
+                    <h4 class="mb-1">{{ book.title }}</h4>
+                    <small class="text-muted">Identifiant : {{ book.id }}</small>
+                </div>
+                <div class="d-flex justify-content-between card-text">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><h5>Date d'édition : </h5>{{ book.editedAt|date('d M Y') }}</li>
+                        <li class="list-group-item"><h5>ISBN : </h5>{{ book.isbn }}</li>
+                        <li class="list-group-item">
+                            <h5>Auteur : </h5>
+                            <ul class="list-group list-group-flush">
+                                {% for author in book.authors %}
+                                    <li class="list-group-item">
+                                        <a href="{{ path('app_admin_author_show', {id: author.id}) }}">{{ author.name }}</a>
+                                    </li>
+                                {% else %}
+                                    <li class="list-group-item">Pas d'auteur connu</li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        <li class="list-group-item">
+                            <h5>Éditeur : </h5>
+                            <a href="{{ path('app_admin_editor_show', {id: book.editor.id}) }}">{{ book.editor.name }}</a>
+                        </li>
+                        <li class="list-group-item"><h5>Nombre de pages : </h5>{{ book.pageNumber }}</li>
+                        <li class="list-group-item"><h5>Synopsis : </h5>{{ book.plot }}</li>
+                    </ul>
+                    <div>
+                        <img src="{{ book.cover }}" alt="Couverture de {{ book.title }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div>Livre non trouvé</div>
+    {% endif %}
+    <a href="{{ path('app_admin_book_index') }}" class="btn btn-primary">Retour</a>
+    <a href="{{ path('app_admin_book_edit', {id: book.id}) }}" class="btn btn-warning">Éditer</a>
+</section>
+{% endblock %}
