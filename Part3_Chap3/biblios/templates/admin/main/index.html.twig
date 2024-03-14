@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration: accueil{% endblock %}
+
+{% block body %}
+    <!-- Header-->
+    <header class="bg-primary bg-gradient text-white">
+        <div class="container px-4 text-center">
+            <h1 class="fw-bolder">Biblios</h1>
+            <p class="lead">Administration</p>
+        </div>
+    </header>
+    <!-- About section-->
+    <section id="about">
+        <div class="container px-4">
+            <div class="row gx-4 justify-content-center">
+                <div class="col-lg-8">
+                    <ul class="nav justify-content-evenly">
+                        <li class="nav-item ">
+                            <h4>Livres : </h4>
+                            <div class="fs-5">
+                                <a href="{{ path('app_admin_book_index') }}"><button class="btn btn-outline-primary">Liste</button></a>
+                                <a href="{{ path('app_admin_book_new') }}"><button class="btn btn-outline-primary">Ajout</button></a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <h4>Auteurs : </h4>
+                            <div class="fs-5">
+                                <a href="{{ path('app_admin_author_index') }}"><button class="btn btn-outline-primary">Liste</button></a>
+                                <a href="{{ path('app_admin_author_new') }}"><button class="btn btn-outline-primary">Ajout</button></a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <h4>Éditeurs : </h4>
+                            <div class="fs-5">
+                                <a href="{{ path('app_admin_editor_index') }}"><button class="btn btn-outline-primary">Liste</button></a>
+                                <a href="{{ path('app_admin_editor_new') }}"><button class="btn btn-outline-primary">Ajout</button></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
