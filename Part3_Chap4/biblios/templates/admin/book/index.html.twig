@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste de livres{% endblock %}
+
+{% block body %}
+    <section class="container px-4">
+        <h1>Liste de livres</h1>
+
+        <ul class="list-group list-group-flush">
+            {% for book in books %}
+                <div class="card mb-1">
+                    <div class="card-body">
+                        <div class="card-title d-flex justify-content-between">
+                            <a href="{{ path('app_admin_book_show', {id: book.id}) }}" class="stretched-link link-dark">
+                                <h4 class="mb-1">{{ book.title }}</h4>
+                            </a>
+                            <small class="text-muted">Identifiant : {{ book.id }}</small>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <li>Aucun enregistrement en base de données.</li>
+            {% endfor %}
+        </ul>
+        {{ pagerfanta(books) }}
+    </section>
+{% endblock %}
